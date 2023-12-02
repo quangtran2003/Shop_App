@@ -7,12 +7,19 @@ import 'package:app_ban_hang/component/text.dart';
 import 'package:app_ban_hang/component/textfield.dart';
 import 'package:flutter/material.dart';
 
-class AddressSCreen extends StatelessWidget {
-  AddressSCreen({super.key});
+class AddressSCreen extends StatefulWidget {
+  const AddressSCreen({super.key});
+
+  @override
+  State<AddressSCreen> createState() => _AddressSCreenState();
+}
+
+class _AddressSCreenState extends State<AddressSCreen> {
   final _blocAddress = BlocAddress();
+
   @override
   Widget build(BuildContext context) {
-    BlocHome _blocHome = ModalRoute.of(context)?.settings.arguments as BlocHome;
+    BlocHome blocHome = ModalRoute.of(context)?.settings.arguments as BlocHome;
 
     return Scaffold(
       appBar: AppBar(
@@ -37,7 +44,6 @@ class AddressSCreen extends StatelessWidget {
               padding: const EdgeInsets.only(top: 15),
               child: MyText(
                 text: 'Địa chỉ giao hàng',
-                fontSize: 17,
               ),
             ),
             StreamBuilder<String?>(
@@ -79,8 +85,10 @@ class AddressSCreen extends StatelessWidget {
                   return GestureDetector(
                     onTap: () {
                       if (snapshot.data == true) {
-                        Navigator.of(context)
-                            .pushNamed(PAY_SCREEN, arguments: _blocHome);
+                        Navigator.of(context).pushNamed(PAY_SCREEN, arguments: {
+                          '_blocHome': blocHome,
+                          '_blocAddress': _blocAddress
+                        });
                       }
                     },
                     child: MyContainer(

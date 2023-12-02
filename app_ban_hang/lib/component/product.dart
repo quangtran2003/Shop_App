@@ -8,7 +8,7 @@ import 'package:app_ban_hang/data/model.dart';
 import 'package:flutter/material.dart';
 
 class MyProduct extends StatelessWidget {
-  BlocHome bloc;
+  BlocHome? bloc;
   ProductModel product;
   String? image;
   String? name;
@@ -19,7 +19,7 @@ class MyProduct extends StatelessWidget {
   double witdh;
   MyProduct({
     Key? key,
-    required this.bloc,
+    this.bloc,
     required this.product,
     this.image,
     this.name,
@@ -34,13 +34,13 @@ class MyProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        bloc.countProduct = 1;
+        bloc?.countProduct = 1;
         if (hasCart) {
           showModalBottomSheet(
               context: context,
-              builder: (BuildContext) {
+              builder: (builderContext) {
                 return InforProductScreen(
-                    context: context, product: product, bloc: bloc);
+                    context: context, product: product, bloc: bloc!);
               });
         }
       },
@@ -97,11 +97,11 @@ class MyProduct extends StatelessWidget {
                         const Color.fromARGB(255, 255, 255, 255)),
                   ),
                   onPressed: () {
-                    bloc.addCart(product, bloc.countProduct);
-                    bloc.countCart();
+                    bloc?.addCart(product, bloc?.countProduct ?? 1);
+                    bloc?.countCart();
                   },
                   child: const Icon(Icons.add_shopping_cart_rounded))
-              : null),
+              : MyText(text: 'X${product.number}')),
     );
   }
 }

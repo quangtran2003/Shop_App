@@ -6,6 +6,7 @@ const HOME_SCREEN = '/HomeScreen';
 const CART_SCREEN = '/CartScreen';
 const ADDRESS_SCREEN = '/AddressScreen';
 const PAY_SCREEN = '/PayScreen';
+const ORDERED_SCREEN = '/OrderScreen';
 
 enum TRANSPORT { FASST, NORMAL, DEAFULT }
 

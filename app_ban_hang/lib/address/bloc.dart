@@ -13,51 +13,57 @@ class BlocAddress {
   final StreamController<bool> _checkAddressController =
       StreamController.broadcast();
   Stream<bool> get streamCheck => _checkAddressController.stream;
-  String? phone = '';
-  String? address = '';
-  String? name = '';
+  String? phoneEror;
+  String? addressError;
+  String? nameEror;
+  String addressValue = '';
+  String nameValue = '';
+  String phoneValue = '';
   bool checkAddress = false;
 
   void isPhoneNumber(String input) {
     bool isAllDigits = input.runes.every((rune) => rune >= 48 && rune <= 57);
     bool isCorrectLength = input.length == 10;
     if (isAllDigits && isCorrectLength) {
-      phone = null;
+      phoneEror = null;
+      phoneValue = input;
     } else {
-      phone = "Số điện thoại không hợp lệ";
+      phoneEror = "Số điện thoại không hợp lệ";
     }
     check();
 
-    _errorPhoneController.sink.add(phone);
+    _errorPhoneController.sink.add(phoneEror);
   }
 
   void isAddress(String input) {
     if (input.length >= 15) {
-      address = null;
+      addressError = null;
+      addressValue = input;
     } else {
-      address = 'Địa chỉ không hợp lệ!';
+      addressError = 'Địa chỉ không hợp lệ!';
     }
     check();
 
-    _errorAddressController.sink.add(address);
+    _errorAddressController.sink.add(addressError);
   }
 
   void isName(String input) {
     check();
     if (input.isNotEmpty) {
-      name = null;
+      nameEror = null;
+      nameValue = input;
     } else {
-      name = 'Tên người nhân không hợp lệ!';
+      nameEror = 'Tên người nhân không hợp lệ!';
     }
     check();
 
-    _errorNameController.sink.add(name);
+    _errorNameController.sink.add(nameEror);
   }
 
   void check() {
     //   print('phone: $phone    add: $address   name: $name');
 
-    if (phone == null && address == null && name == null) {
+    if (phoneEror == null && addressError == null && nameEror == null) {
       checkAddress = true;
     } else {
       checkAddress = false;

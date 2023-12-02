@@ -22,7 +22,6 @@ class InforProductScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double x = MediaQuery.of(context).size.height;
-    double y = MediaQuery.of(context).size.width;
     return SizedBox(
       height: x * 3 / 4,
       child: Column(
@@ -72,21 +71,23 @@ class InforProductScreen extends StatelessWidget {
                   onTap: () {
                     bloc.checkDippingSauce();
                   },
-                  child: _buildSpice(bloc.streamDippingSauce,
+                  child: _buildSpice(bloc.streamDippingSauce, bloc.dippingSauce,
                       'Sốt chấm đặc biệt! (+20.000 vnđ)'),
                 ),
                 GestureDetector(
                   onTap: () {
                     bloc.checkSoup();
                   },
-                  child: _buildSpice(
-                      bloc.streamSoup, 'Muối chấm thần thánh! (+10.000 vnđ)'),
+                  child: _buildSpice(bloc.streamSoup, bloc.soup,
+                      'Muối chấm thần thánh! (+10.000 vnđ)'),
                 ),
                 GestureDetector(
                   onTap: () {
                     bloc.checkCucumberSalad();
                   },
-                  child: _buildSpice(bloc.streamCucumberSalad,
+                  child: _buildSpice(
+                      bloc.streamCucumberSalad,
+                      bloc.cucumberSalad,
                       'Nộm dưa chuột siêu hot! (+20.000 vnđ)'),
                 )
               ],
@@ -161,12 +162,11 @@ class InforProductScreen extends StatelessWidget {
     );
   }
 
-  StreamBuilder<bool> _buildSpice(Stream<bool> stream, String text) {
+  StreamBuilder<bool> _buildSpice(Stream<bool> stream, bool init, String text) {
     return StreamBuilder<bool>(
-        initialData: false,
+        initialData: init,
         stream: stream,
         builder: (context, snapShoot) {
-          print('${snapShoot.data}ád');
           return Container(
             margin: const EdgeInsets.only(top: 15),
             decoration: BoxDecoration(

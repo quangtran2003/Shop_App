@@ -8,7 +8,6 @@ import 'package:app_ban_hang/component/text.dart';
 import 'package:app_ban_hang/data/model.dart';
 import 'package:flutter/material.dart';
 
-// Thêm imports của các thư viện khác nếu cần
 class ListProduct extends StatelessWidget {
   BuildContext context;
   double bottomSheetHeight;
@@ -93,6 +92,5 @@ class ListProduct extends StatelessWidget {
         ],
       ),
     );
-    ;
   }
 }

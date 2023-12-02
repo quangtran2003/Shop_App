@@ -21,13 +21,6 @@ class BlocCart {
     _listProductController.sink.add(productS);
   }
 
-  void pay() {
-    for (var element in productS) {
-      price += element.number ?? 0;
-    }
-    _priceController.sink.add(price);
-  }
-
   void dispose() {
     _listProductController.close();
     _priceController.close();

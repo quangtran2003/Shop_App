@@ -28,9 +28,9 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    BlocHome _blocHome = ModalRoute.of(context)?.settings.arguments as BlocHome;
-    _blocHome.pay();
-    List<int> listProd = _blocHome.listNumber;
+    BlocHome blocHome = ModalRoute.of(context)?.settings.arguments as BlocHome;
+    blocHome.payCart();
+    List<int> listProd = blocHome.listNumber;
     return Scaffold(
       appBar: AppBar(
         leading: GestureDetector(
@@ -55,8 +55,8 @@ class _CartScreenState extends State<CartScreen> {
           const Divider(),
           Expanded(
               child: StreamBuilder<List<ProductModel>>(
-            initialData: _blocHome.cart,
-            stream: _blocHome.streamCart,
+            initialData: blocHome.cart,
+            stream: blocHome.streamCart,
             builder: (context, snapshot) {
               if (snapshot.data?.length == 0) {
                 return SizedBox(
@@ -98,7 +98,7 @@ class _CartScreenState extends State<CartScreen> {
                                   ),
                                 ),
                               ]),
-                              trailing: Container(
+                              trailing: SizedBox(
                                 width: 150,
                                 child: Row(
                                   children: [
@@ -116,7 +116,7 @@ class _CartScreenState extends State<CartScreen> {
                                                     return;
                                                   }
                                                   listProd[index]--;
-                                                  _blocHome.updateNumber(
+                                                  blocHome.updateNumber(
                                                       index, listProd[index]);
                                                 });
                                               },
@@ -130,7 +130,7 @@ class _CartScreenState extends State<CartScreen> {
                                               onPressed: () {
                                                 setState(() {
                                                   listProd[index] += 1;
-                                                  _blocHome.updateNumber(
+                                                  blocHome.updateNumber(
                                                       index, listProd[index]);
                                                 });
                                               },
@@ -144,7 +144,8 @@ class _CartScreenState extends State<CartScreen> {
                                     Expanded(child: Container()),
                                     GestureDetector(
                                         onTap: () {
-                                          _blocHome.removeCart(index);
+                                          blocHome.removeCart(index);
+                                          blocHome.payCart();
                                         },
                                         child:
                                             const MyIcon(icon: Icons.delete)),
@@ -173,11 +174,9 @@ class _CartScreenState extends State<CartScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   StreamBuilder<bool>(
-                      stream: _blocHome.stremsideDishes,
-                      initialData: _blocHome.sideDishes,
+                      stream: blocHome.stremsideDishes,
+                      initialData: blocHome.sideDishes,
                       builder: (context, snapshot) {
-                        print(_blocHome.sideDishes);
-                        print('${snapshot.data}sdfsdfdf');
                         if (snapshot.data == true) {
                           return Container(
                             margin: const EdgeInsets.only(left: 20),
@@ -198,16 +197,16 @@ class _CartScreenState extends State<CartScreen> {
                           switch (index) {
                             case 0:
                               return StreamBuilder<bool>(
-                                  stream: _blocHome.streamDippingSauce,
-                                  initialData: _blocHome.dippingSauce,
+                                  stream: blocHome.streamDippingSauce,
+                                  initialData: blocHome.dippingSauce,
                                   builder: (context, snapshot) {
                                     if (snapshot.data == true) {
                                       return ListTile(
                                         trailing: GestureDetector(
                                             onTap: () {
-                                              _blocHome.checkDippingSauce();
-                                              _blocHome.pay();
-                                              _blocHome.hasSideDishes();
+                                              blocHome.checkDippingSauce();
+                                              blocHome.payCart();
+                                              blocHome.hasSideDishes();
                                             },
                                             child: const MyIcon(
                                                 icon: Icons.delete)),
@@ -226,16 +225,16 @@ class _CartScreenState extends State<CartScreen> {
                                   });
                             case 1:
                               return StreamBuilder<bool>(
-                                  stream: _blocHome.streamSoup,
-                                  initialData: _blocHome.soup,
+                                  stream: blocHome.streamSoup,
+                                  initialData: blocHome.soup,
                                   builder: (context, snapshot) {
                                     if (snapshot.data == true) {
                                       return ListTile(
                                         trailing: GestureDetector(
                                             onTap: () {
-                                              _blocHome.checkSoup();
-                                              _blocHome.pay();
-                                              _blocHome.hasSideDishes();
+                                              blocHome.checkSoup();
+                                              blocHome.payCart();
+                                              blocHome.hasSideDishes();
                                             },
                                             child: const MyIcon(
                                                 icon: Icons.delete)),
@@ -254,16 +253,16 @@ class _CartScreenState extends State<CartScreen> {
                                   });
                             case 2:
                               return StreamBuilder<bool>(
-                                  stream: _blocHome.streamCucumberSalad,
-                                  initialData: _blocHome.cucumberSalad,
+                                  stream: blocHome.streamCucumberSalad,
+                                  initialData: blocHome.cucumberSalad,
                                   builder: (context, snapshot) {
                                     if (snapshot.data == true) {
                                       return ListTile(
                                         trailing: GestureDetector(
                                             onTap: () {
-                                              _blocHome.checkCucumberSalad();
-                                              _blocHome.pay();
-                                              _blocHome.hasSideDishes();
+                                              blocHome.checkCucumberSalad();
+                                              blocHome.payCart();
+                                              blocHome.hasSideDishes();
                                             },
                                             child: const MyIcon(
                                                 icon: Icons.delete)),
@@ -295,8 +294,8 @@ class _CartScreenState extends State<CartScreen> {
             height: 50,
             child: Row(children: [
               StreamBuilder(
-                stream: _blocHome.stremPrice,
-                initialData: _blocHome.price,
+                stream: blocHome.stremPrice,
+                initialData: blocHome.priceProduct,
                 builder: (context, snapshot) {
                   // print('${snapshot.data}aksdja');
                   if (snapshot.data != null) {
@@ -319,8 +318,8 @@ class _CartScreenState extends State<CartScreen> {
               ),
               Expanded(
                 child: StreamBuilder(
-                  initialData: _blocHome.cart,
-                  stream: _blocHome.streamCart,
+                  initialData: blocHome.cart,
+                  stream: blocHome.streamCart,
                   builder: (context, snapshot) {
                     return GestureDetector(
                         onTap: () {
@@ -328,13 +327,13 @@ class _CartScreenState extends State<CartScreen> {
                             !_blocAddress.checkAddress
                                 ? Navigator.of(context).pushNamed(
                                     ADDRESS_SCREEN,
-                                    arguments: _blocHome)
-                                : Navigator.of(context).pushNamed(PAY_SCREEN,
-                                    arguments: _blocHome);
+                                    arguments: blocHome)
+                                : Navigator.of(context)
+                                    .pushNamed(PAY_SCREEN, arguments: blocHome);
                           }
                         },
                         child: Container(
-                          margin: const EdgeInsets.only(left: 20),
+                          margin: const EdgeInsets.only(left: 10),
                           decoration: BoxDecoration(
                               color: snapshot.data?.length == 0
                                   ? Colors.grey

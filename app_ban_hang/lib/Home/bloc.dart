@@ -37,6 +37,14 @@ class BlocHome {
   Stream<bool> get stremFlower => _flowerController.stream;
   final StreamController<bool> _bagController = StreamController.broadcast();
   Stream<bool> get streamBag => _bagController.stream;
+  final StreamController<bool> _gifsController = StreamController.broadcast();
+  Stream<bool> get streamGifs => _gifsController.stream;
+
+  final StreamController<int> _gifsPriceController =
+      StreamController.broadcast();
+  Stream<int> get streamGifsPrice => _gifsPriceController.stream;
+  final StreamController<int> _payAllController = StreamController.broadcast();
+  Stream<int> get streampayAll => _payAllController.stream;
 
   bool dippingSauce = false;
   bool soup = false;
@@ -45,11 +53,35 @@ class BlocHome {
   List<String?> listId = [];
   int countProduct = 1;
   List<int> listNumber = [];
-  int price = 0;
+  int priceProduct = 0;
   bool sideDishes = false;
   TRANSPORT transport = TRANSPORT.DEAFULT;
   bool hasFlower = false;
   bool hasBag = false;
+  bool gifs = false;
+  int gifsPrice = 0;
+  int priceAll = 0;
+
+  void payAll() {
+    payCart();
+    payGifsPrice();
+    priceAll = 0;
+    priceAll = gifsPrice +
+        priceProduct +
+        (transport == TRANSPORT.FASST ? 30000 : 15000);
+    _payAllController.sink.add(priceAll);
+  }
+
+  void payGifsPrice() {
+    gifsPrice = 0;
+    if (hasBag) gifsPrice += 30000;
+    if (hasFlower) gifsPrice += 100000;
+    _gifsPriceController.sink.add(gifsPrice);
+  }
+
+  void hasGifs() {
+    _gifsController.sink.add(hasBag && hasFlower);
+  }
 
   void checkFlower() {
     hasFlower = !hasFlower;
@@ -61,40 +93,36 @@ class BlocHome {
     _bagController.sink.add(hasBag);
   }
 
-  void checkTranport() {
-    if (transport == TRANSPORT.NORMAL) {
-      transport = TRANSPORT.FASST;
-    } else {
-      transport = TRANSPORT.NORMAL;
-    }
+  void checkTranport(TRANSPORT value) {
+    transport = value;
     _transportController.sink.add(transport);
   }
 
-  void hasSideDishes() {
+  double hasSideDishes() {
     sideDishes = (cucumberSalad || soup || dippingSauce);
-    if (cucumberSalad || soup || dippingSauce) {
-      sideDishes = true;
-    } else {
-      sideDishes = false;
-    }
+    double count = 0;
+    if (cucumberSalad) count++;
+    if (soup) count++;
+    if (dippingSauce) count++;
     _sideDishesController.sink.add(sideDishes);
+    return count;
   }
 
-  void pay() {
-    price = 0;
+  void payCart() {
+    priceProduct = 0;
     for (var element in cart) {
-      price += (element.number ?? 0) * (element.price ?? 0);
+      priceProduct += (element.number ?? 0) * (element.price ?? 0);
     }
     if (dippingSauce) {
-      price = price + 20000;
+      priceProduct = priceProduct + 20000;
     }
     if (soup) {
-      price = price + 10000;
+      priceProduct = priceProduct + 10000;
     }
     if (cucumberSalad) {
-      price = price + 20000;
+      priceProduct = priceProduct + 20000;
     }
-    _priceController.sink.add(price);
+    _priceController.sink.add(priceProduct);
   }
 
   void initData() {
@@ -184,6 +212,9 @@ class BlocHome {
     _sideDishesController.close();
     _transportController.close();
     _priceController.close();
+    _bagController.close();
+    _flowerController.close();
+    _gifsController.close();
   }
 }
 //enum TRANSPORT{FASST,NORMAL }

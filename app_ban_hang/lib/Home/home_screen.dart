@@ -19,18 +19,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  BlocHome _blocHome = BlocHome();
+  final BlocHome _blocHome = BlocHome();
   @override
   void dispose() {
-    // TODO: implement dispose
+    super.dispose();
     _blocHome.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    double x = MediaQuery.of(context).size.height;
-    double y = MediaQuery.of(context).size.width;
-
     List<ProductModel> products = List<ProductModel>.from(
         data.map((item) => ProductModel.fromJson(item)));
     return Scaffold(
@@ -38,13 +35,12 @@ class _HomeScreenState extends State<HomeScreen> {
         toolbarHeight: 70,
         actions: [
           Padding(
-            padding: EdgeInsets.fromLTRB(10, 0, 20, 0),
+            padding: const EdgeInsets.fromLTRB(10, 0, 20, 0),
             child: GestureDetector(
                 onTap: () {
-                  Navigator.of(context)
-                      .pushNamed(PAY_SCREEN, arguments: _blocHome);
+                  //   Navigator.of(context).pushNamed(PAY_SCREEN);
                 },
-                child: Icon(Icons.more_horiz)),
+                child: const Icon(Icons.more_horiz)),
           )
         ],
         leadingWidth: 100,
@@ -53,9 +49,15 @@ class _HomeScreenState extends State<HomeScreen> {
           width: double.infinity,
           alignment: Alignment.bottomLeft,
           decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              image: DecorationImage(
-                  image: AssetImage('logo.jpg'), fit: BoxFit.cover)),
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            image: DecorationImage(
+                image:
+                    // NetworkImage(
+                    //     'https://image.similarpng.com/thumbnail/2020/11/Online-Shop-logo-isolated-on-transparent-PNG.png'),
+                    // fit: BoxFit.cover,
+                    AssetImage('pizza.jpg'),
+                fit: BoxFit.cover),
+          ),
         ),
       ),
       body: Column(
@@ -69,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(16)),
                     image: DecorationImage(
-                        image: AssetImage('background.jpg'),
+                        image: AssetImage('background.png'),
                         fit: BoxFit.cover)),
               ),
               Container(
@@ -81,13 +83,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Container(
-                          //  margin: const EdgeInsets.symmetric(vertical: 20),
-                          child: MyText(
+                      MyText(
                         text: '40 món ngon khao miễn phí hôm nay',
                         fontSize: 20,
                         color: Colors.white,
-                      )),
+                      ),
                       ElevatedButton(
                         onPressed: () {
                           double screenHeight =
@@ -117,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ]),
           ),
-          Container(
+          SizedBox(
             height: 100,
             // color: Colors.grey,
             width: double.infinity,
@@ -171,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         GestureDetector(
                           onTap: () {
                             _blocHome.initData();
-                            _blocHome.pay();
+                            _blocHome.payCart();
                             _blocHome.hasSideDishes();
                             Navigator.of(context)
                                 .pushNamed(CART_SCREEN, arguments: _blocHome);
@@ -223,7 +223,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ]),
           ),
           Container(
-              padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
               alignment: Alignment.centerLeft,
               child: MyText(
                 text: 'Món Ngon Nên Thử!',

@@ -4,6 +4,7 @@ import 'package:app_ban_hang/Home/home_screen.dart';
 import 'package:app_ban_hang/address/address_screem.dart';
 import 'package:app_ban_hang/cart/cart_screen.dart';
 import 'package:app_ban_hang/component/const.dart';
+import 'package:app_ban_hang/ordered/ordered_screen.dart';
 import 'package:app_ban_hang/pay/pay_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -20,9 +21,10 @@ class MyApp extends StatelessWidget {
       initialRoute: HOME_SCREEN,
       routes: {
         HOME_SCREEN: (context) => const HomeScreen(),
-        PAY_SCREEN: (context) => PayScreen(),
+        PAY_SCREEN: (context) => const PayScreen(),
         CART_SCREEN: (context) => const CartScreen(),
-        ADDRESS_SCREEN: (context) => AddressSCreen(),
+        ADDRESS_SCREEN: (context) => const AddressSCreen(),
+        ORDERED_SCREEN: (context) => OrderedScreen(),
       },
       debugShowCheckedModeBanner: false,
     );
