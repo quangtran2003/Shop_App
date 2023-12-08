@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     // NetworkImage(
                     //     'https://image.similarpng.com/thumbnail/2020/11/Online-Shop-logo-isolated-on-transparent-PNG.png'),
                     // fit: BoxFit.cover,
-                    AssetImage('pizza.jpg'),
+                    AssetImage('logo.png'),
                 fit: BoxFit.cover),
           ),
         ),
