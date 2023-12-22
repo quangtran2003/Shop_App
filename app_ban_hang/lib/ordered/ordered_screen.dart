@@ -84,7 +84,7 @@ class OrderedScreen extends StatelessWidget {
                           child: Divider(),
                         ),
                         MyText(
-                          text: 'Người nhận: ${blocAddress.addressValue}',
+                          text: 'Người nhận: ${blocAddress.nameValue}',
                           fontSize: 16,
                           textAlign: TextAlign.left,
                         ),

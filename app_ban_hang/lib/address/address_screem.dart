@@ -70,6 +70,7 @@ class _AddressSCreenState extends State<AddressSCreen> {
                       initialData: _blocAddress.addressValue,
                       builder: (context, snap) {
                         return MyTextField(
+                          textColor: Colors.black.withOpacity(0.8),
                           textHint: snap.data,
                           errorText: snapshot.data,
                           onChange: (String value) {
@@ -87,6 +88,7 @@ class _AddressSCreenState extends State<AddressSCreen> {
                       initialData: _blocAddress.phoneValue,
                       builder: (context, snap) {
                         return MyTextField(
+                          textColor: Colors.black.withOpacity(0.8),
                           textHint: snap.data,
                           errorText: snapshot.data,
                           onChange: (String value) {
@@ -104,6 +106,7 @@ class _AddressSCreenState extends State<AddressSCreen> {
                       initialData: _blocAddress.nameValue,
                       builder: (context, snap) {
                         return MyTextField(
+                          textColor: Colors.black.withOpacity(0.8),
                           textHint: snap.data,
                           errorText: snapshot.data,
                           onChange: (String value) {
