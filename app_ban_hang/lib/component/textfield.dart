@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MyTextField extends StatefulWidget {
+  final String? boolController;
   final Color? textColor;
   final bool? hasPrefixIcon;
   final bool? hasPass;
@@ -17,6 +18,7 @@ class MyTextField extends StatefulWidget {
     this.textColor,
     this.hasPrefixIcon,
     this.onEditingComplete,
+    this.boolController,
   }) : super(key: key);
 
   @override
@@ -46,9 +48,9 @@ class _MyTextFieldState extends State<MyTextField> {
                     ? const Icon(Icons.search)
                     : null,
                 hintText: widget.textHint,
-                focusColor: Colors.purple,
+                focusColor: Colors.grey,
                 // fillColor: widget.textColor,
-                fillColor: const Color.fromARGB(255, 195, 75, 216),
+                fillColor: Colors.grey,
                 filled: false,
                 suffixIcon: widget.hasPass != null
                     ? checkPass
@@ -71,13 +73,12 @@ class _MyTextFieldState extends State<MyTextField> {
                               color: Colors.purple,
                             ))
                     : null,
-                hintStyle: TextStyle(
-                    color: widget.textColor ?? Colors.purple, fontSize: 18),
+                hintStyle: TextStyle(color: widget.textColor, fontSize: 18),
                 contentPadding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 17),
                 border: OutlineInputBorder(
                     borderSide:
-                        BorderSide(color: widget.textColor ?? Colors.purple),
+                        BorderSide(color: widget.textColor ?? Colors.grey),
                     borderRadius: BorderRadius.circular(20))),
           ),
           if (widget.errorText != null)

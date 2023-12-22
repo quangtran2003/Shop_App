@@ -5,6 +5,10 @@ import 'dart:ui';
 const HOME_SCREEN = '/HomeScreen';
 const CART_SCREEN = '/CartScreen';
 const ADDRESS_SCREEN = '/AddressScreen';
+const LOGIN_SCREEN = '/Login';
+
+const RESIGER_SCREEN = '/Resiger';
+
 const PAY_SCREEN = '/PayScreen';
 const ORDERED_SCREEN = '/OrderScreen';
 

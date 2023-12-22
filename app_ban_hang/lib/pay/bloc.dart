@@ -1,5 +1,0 @@
-
-
-// class blocPay{
-//   StreamBuilder<bool>
-// }

@@ -38,7 +38,16 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.fromLTRB(10, 0, 20, 0),
             child: GestureDetector(
                 onTap: () {
-                  //   Navigator.of(context).pushNamed(PAY_SCREEN);
+                  // showModalBottomSheet(
+                  //     context: context,
+                  //     builder: (buildContext) {
+                  //       return SingleChildScrollView(
+                  //         child: Container(
+                  //           height: 100,
+                  //           child: MyTextField(),
+                  //         ),
+                  //       );
+                  //     });
                 },
                 child: const Icon(Icons.more_horiz)),
           )
@@ -51,12 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
           decoration: const BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(10)),
             image: DecorationImage(
-                image:
-                    // NetworkImage(
-                    //     'https://image.similarpng.com/thumbnail/2020/11/Online-Shop-logo-isolated-on-transparent-PNG.png'),
-                    // fit: BoxFit.cover,
-                    AssetImage('logo.png'),
-                fit: BoxFit.cover),
+                image: AssetImage('assets/logo.png'), fit: BoxFit.cover),
           ),
         ),
       ),
@@ -64,56 +68,62 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           Expanded(
             child: Stack(alignment: Alignment.center, children: [
-              Container(
-                width: double.infinity,
-                margin: const EdgeInsets.symmetric(vertical: 20),
-                height: double.infinity,
-                decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(16)),
-                    image: DecorationImage(
-                        image: AssetImage('background.png'),
-                        fit: BoxFit.cover)),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Container(
+                  width: double.infinity,
+                  margin: const EdgeInsets.symmetric(vertical: 20),
+                  height: double.infinity,
+                  decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(16)),
+                      image: DecorationImage(
+                          image: AssetImage('assets/background.png'),
+                          fit: BoxFit.cover)),
+                ),
               ),
-              Container(
-                height: 80,
-                width: double.infinity,
-                color: Colors.grey.withOpacity(0.8),
-                child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      MyText(
-                        text: '40 món ngon khao miễn phí hôm nay',
-                        fontSize: 20,
-                        color: Colors.white,
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          double screenHeight =
-                              MediaQuery.of(context).size.height;
-                          double bottomSheetHeight = (4.3 / 5) * screenHeight;
-
-                          showModalBottomSheet(
-                              isScrollControlled: true,
-                              context: context,
-                              builder: (BuildContext) {
-                                return ListProduct(
-                                    context: context,
-                                    bottomSheetHeight: bottomSheetHeight,
-                                    products: products,
-                                    bloc: _blocHome);
-                              });
-                        },
-                        style: ButtonStyle(
-                          foregroundColor:
-                              MaterialStateProperty.all<Color>(Colors.white),
-                          backgroundColor:
-                              MaterialStateProperty.all<Color>(Colors.red),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Container(
+                  height: 80,
+                  width: double.infinity,
+                  color: Colors.grey.withOpacity(0.8),
+                  child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        MyText(
+                          text: '40 món ngon khao miễn phí hôm nay',
+                          fontSize: 20,
+                          color: Colors.white,
                         ),
-                        child: MyText(text: 'Nhận ngay'),
-                      )
-                    ]),
+                        ElevatedButton(
+                          onPressed: () {
+                            double screenHeight =
+                                MediaQuery.of(context).size.height;
+                            double bottomSheetHeight = (4.3 / 5) * screenHeight;
+
+                            showModalBottomSheet(
+                                isScrollControlled: true,
+                                context: context,
+                                builder: (BuildContext) {
+                                  return ListProduct(
+                                      context: context,
+                                      bottomSheetHeight: bottomSheetHeight,
+                                      products: products,
+                                      bloc: _blocHome);
+                                });
+                          },
+                          style: ButtonStyle(
+                            foregroundColor:
+                                MaterialStateProperty.all<Color>(Colors.white),
+                            backgroundColor:
+                                MaterialStateProperty.all<Color>(Colors.red),
+                          ),
+                          child: MyText(text: 'Nhận ngay'),
+                        )
+                      ]),
+                ),
               ),
             ]),
           ),

@@ -18,6 +18,22 @@ class _AddressSCreenState extends State<AddressSCreen> {
   final _blocAddress = BlocAddress();
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _blocAddress.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      _blocAddress.loadAddress();
+    });
+    _blocAddress.check();
+  }
+
+  @override
   Widget build(BuildContext context) {
     BlocHome blocHome = ModalRoute.of(context)?.settings.arguments as BlocHome;
 
@@ -49,42 +65,62 @@ class _AddressSCreenState extends State<AddressSCreen> {
             StreamBuilder<String?>(
                 stream: _blocAddress.streamAddress,
                 builder: (context, snapshot) {
-                  return MyTextField(
-                    errorText: snapshot.data,
-                    onChange: (String value) {
-                      _blocAddress.isAddress(value);
-                    },
-                  );
+                  return StreamBuilder<String?>(
+                      stream: _blocAddress.streamAdd,
+                      initialData: _blocAddress.addressValue,
+                      builder: (context, snap) {
+                        return MyTextField(
+                          textHint: snap.data,
+                          errorText: snapshot.data,
+                          onChange: (String value) {
+                            _blocAddress.isAddress(value);
+                          },
+                        );
+                      });
                 }),
             MyText(text: 'Số điện thoại'),
             StreamBuilder<String?>(
                 stream: _blocAddress.streamPhone,
                 builder: (context, snapshot) {
-                  return MyTextField(
-                    errorText: snapshot.data,
-                    onChange: (String value) {
-                      _blocAddress.isPhoneNumber(value);
-                    },
-                  );
+                  return StreamBuilder<String?>(
+                      stream: _blocAddress.streamPhonee,
+                      initialData: _blocAddress.phoneValue,
+                      builder: (context, snap) {
+                        return MyTextField(
+                          textHint: snap.data,
+                          errorText: snapshot.data,
+                          onChange: (String value) {
+                            _blocAddress.isPhoneNumber(value);
+                          },
+                        );
+                      });
                 }),
             MyText(text: 'Tên người nhận'),
             StreamBuilder<String?>(
                 stream: _blocAddress.streamName,
                 builder: (context, snapshot) {
-                  return MyTextField(
-                    errorText: snapshot.data,
-                    onChange: (String value) {
-                      _blocAddress.isName(value);
-                    },
-                  );
+                  return StreamBuilder<String?>(
+                      stream: _blocAddress.streamNamee,
+                      initialData: _blocAddress.nameValue,
+                      builder: (context, snap) {
+                        return MyTextField(
+                          textHint: snap.data,
+                          errorText: snapshot.data,
+                          onChange: (String value) {
+                            _blocAddress.isName(value);
+                          },
+                        );
+                      });
                 }),
             Expanded(child: Container()),
             StreamBuilder<bool>(
                 stream: _blocAddress.streamCheck,
+                initialData: _blocAddress.checkAddress,
                 builder: (context, snapshot) {
                   return GestureDetector(
                     onTap: () {
                       if (snapshot.data == true) {
+                        _blocAddress.saveAddress();
                         Navigator.of(context).pushNamed(PAY_SCREEN, arguments: {
                           '_blocHome': blocHome,
                           '_blocAddress': _blocAddress

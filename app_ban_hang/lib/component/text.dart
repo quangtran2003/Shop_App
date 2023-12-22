@@ -27,6 +27,7 @@ class MyText extends StatelessWidget {
     return Text(
       text,
       maxLines: maxLine,
+      overflow: TextOverflow.ellipsis,
       textAlign: textAlign,
       style: TextStyle(
           decoration: decoration,
