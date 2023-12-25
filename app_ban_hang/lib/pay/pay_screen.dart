@@ -413,7 +413,9 @@ class _PayScreenState extends State<PayScreen> {
                                 fontSize: 15,
                               ),
                               Expanded(child: Container()),
-                              MyText(text: '${format(snapshot.data ?? 0)} vnđ')
+                              MyText(
+                                text: '${format(snapshot.data ?? 0)} vnđ',
+                              )
                             ],
                           );
                         }
@@ -550,6 +552,7 @@ class _PayScreenState extends State<PayScreen> {
                 title: MyText(
                   textAlign: TextAlign.left,
                   text: text,
+                  maxLine: 3,
                   fontWeight: FontWeight.bold,
                 ),
               ),

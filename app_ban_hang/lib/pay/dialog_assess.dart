@@ -46,7 +46,7 @@ class DialogScreen extends StatelessWidget {
                 fontSize: 25,
               ),
               MyText(
-                text: 'Đơn hàng sẽ sớm được shipper giao đến tay bạn!',
+                text: 'Đơn hàng sẽ sớm được shipper giao đến bạn!',
                 color: Colors.black,
                 fontSize: 16,
               ),
@@ -55,25 +55,11 @@ class DialogScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).pushNamed(HOME_SCREEN);
-                      },
-                      child: _buildButtom('Trang chủ'),
-                    ),
+                    _buildButtom('Trang chủ', HOME_SCREEN, context),
                     const SizedBox(
                       width: 10,
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).pushNamed(ORDERED_SCREEN,
-                            arguments: {
-                              '_blocHome': blocHome,
-                              '_blocAddress': blocAddress
-                            });
-                      },
-                      child: _buildButtom('Xem đơn hàng'),
-                    )
+                    _buildButtom('Xem đơn hàng', ORDERED_SCREEN, context)
                   ],
                 ),
               )
@@ -84,20 +70,26 @@ class DialogScreen extends StatelessWidget {
     );
   }
 
-  Expanded _buildButtom(String text) {
+  Expanded _buildButtom(String text, String screen, BuildContext context) {
     return Expanded(
       flex: 1,
-      child: Center(
-        child: MyContainer(
-          height: 40,
-          width: 120,
-          color: Colors.white,
-          boder: 10,
-          child: Center(
-              child: MyText(
-            text: text,
-            color: Colors.black,
-          )),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(context).pushNamed(ORDERED_SCREEN,
+              arguments: {'_blocHome': blocHome, '_blocAddress': blocAddress});
+        },
+        child: Center(
+          child: MyContainer(
+            height: 40,
+            width: 120,
+            color: Colors.white,
+            boder: 10,
+            child: Center(
+                child: MyText(
+              text: text,
+              color: Colors.black,
+            )),
+          ),
         ),
       ),
     );

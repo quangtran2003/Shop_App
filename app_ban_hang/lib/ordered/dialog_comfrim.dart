@@ -13,7 +13,7 @@ class DialogComfrim extends StatelessWidget {
       height: 500,
       child: Center(
         child: Container(
-          height: 170,
+          height: 130,
           margin: const EdgeInsets.symmetric(horizontal: 20),
           padding: const EdgeInsets.only(top: 10),
           decoration: BoxDecoration(
@@ -24,7 +24,8 @@ class DialogComfrim extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               MyText(
-                text: 'Bạn có chắc chắn sẽ hủy đơn hàng này chứ!',
+                maxLine: 2,
+                text: 'Xác nhận hủy đơn hàng!',
                 color: Colors.black,
                 fontSize: 25,
               ),
@@ -33,21 +34,22 @@ class DialogComfrim extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    GestureDetector(
-                      onTap: () {
+                    _buildButtom(
+                      'Hủy bỏ',
+                      Colors.grey.withOpacity(0.5),
+                      () {
                         Navigator.of(context).pop();
                       },
-                      child:
-                          _buildButtom('Hủy bỏ', Colors.grey.withOpacity(0.5)),
                     ),
                     const SizedBox(
                       width: 10,
                     ),
-                    GestureDetector(
-                      onTap: () {
+                    _buildButtom(
+                      'Đồng ý',
+                      Colors.red,
+                      () {
                         Navigator.of(context).pushNamed(HOME_SCREEN);
                       },
-                      child: _buildButtom('Đồng ý', Colors.red),
                     )
                   ],
                 ),
@@ -59,20 +61,23 @@ class DialogComfrim extends StatelessWidget {
     );
   }
 
-  Expanded _buildButtom(String text, Color color) {
+  Expanded _buildButtom(String text, Color color, void Function()? onTap) {
     return Expanded(
       flex: 1,
-      child: Center(
-        child: MyContainer(
-          height: 40,
-          width: 120,
-          color: color,
-          boder: 10,
-          child: Center(
-              child: MyText(
-            text: text,
-            color: Colors.black,
-          )),
+      child: GestureDetector(
+        onTap: onTap,
+        child: Center(
+          child: MyContainer(
+            height: 40,
+            width: 120,
+            color: color,
+            boder: 10,
+            child: Center(
+                child: MyText(
+              text: text,
+              color: Colors.black,
+            )),
+          ),
         ),
       ),
     );

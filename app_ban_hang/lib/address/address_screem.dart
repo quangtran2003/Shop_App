@@ -19,7 +19,6 @@ class _AddressSCreenState extends State<AddressSCreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _blocAddress.dispose();
   }
@@ -27,7 +26,7 @@ class _AddressSCreenState extends State<AddressSCreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _blocAddress.loadAddress();
     });
     _blocAddress.check();

@@ -20,7 +20,7 @@ class Resiger extends GetView<ResigerController> {
         child: Container(
           height: x,
           width: y,
-          color: Color.fromARGB(255, 245, 229, 246),
+          color: const Color.fromARGB(255, 245, 229, 246),
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child: Column(
             children: [
@@ -45,7 +45,7 @@ class Resiger extends GetView<ResigerController> {
               Container(
                 alignment: Alignment.bottomLeft,
                 child: const Text(
-                  'Resiger',
+                  'Đăng kí',
                   style: TextStyle(
                       color: Colors.purple,
                       fontSize: 25,
@@ -54,7 +54,7 @@ class Resiger extends GetView<ResigerController> {
               ),
               Obx(
                 () => MyTextField(
-                  textHint: 'Enter your email',
+                  textHint: 'Nhập email của bạn',
                   errorText: controller.emailError.value,
                   onChange: (value) {
                     controller.validateEmail(value);
@@ -64,7 +64,7 @@ class Resiger extends GetView<ResigerController> {
               ),
               Obx(
                 () => MyTextField(
-                  textHint: 'Pass word',
+                  textHint: 'Nhập mật khẩu',
                   hasPass: true,
                   errorText: controller.passWordError.value,
                   onChange: (value) {
@@ -75,7 +75,7 @@ class Resiger extends GetView<ResigerController> {
               ),
               Obx(
                 () => MyTextField(
-                  textHint: 'Confrim pass word',
+                  textHint: 'Xác nhận mật khẩu',
                   hasPass: true,
                   errorText: controller.confrimPassWordError.value,
                   onChange: (value) {
@@ -114,9 +114,10 @@ class Resiger extends GetView<ResigerController> {
                         borderRadius: BorderRadius.circular(20)),
                     child: Center(
                         child: MyText(
-                      text: "Resiger",
-                      color:
-                          controller.checkResiger.value ? Colors.white : null,
+                      text: "Đăng kí",
+                      color: controller.checkResiger.value
+                          ? Colors.white
+                          : Colors.grey,
                       fontSize: 20,
                     )),
                   ),

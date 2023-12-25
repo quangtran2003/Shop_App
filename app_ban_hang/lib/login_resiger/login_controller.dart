@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names, camel_case_types
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,16 +27,13 @@ class LoginController extends GetxController {
     )
         .then((UserCredential userCredential) {
       checkAccount.value = CHECK_ACCOUNT.Success;
-      print('Đăng nhập thành công: ${userCredential.user?.email}');
     }).catchError((error) {
       if (error.code == 'invalid-email') {
         checkAccount.value = CHECK_ACCOUNT.NotFound;
-        showErrorSignIn.value = 'Account does not exist !';
-        print('Tài khoản không tồn tại');
+        showErrorSignIn.value = 'Tài khoản không tồn tại !';
       } else {
         checkAccount.value = CHECK_ACCOUNT.AthorError;
-        showErrorSignIn.value = 'Login failed!';
-        print('Đăng nhập thất bại: ${error.code}');
+        showErrorSignIn.value = 'Đăng nhập thất bại!';
       }
     });
   }
@@ -78,7 +77,7 @@ class LoginController extends GetxController {
       checkSuccessUserName.value = true;
     } else {
       checkSuccessUserName.value = false;
-      userNameError.value = 'Invalid email!';
+      userNameError.value = 'Email không hợp lệ!';
     }
   }
 
@@ -88,7 +87,7 @@ class LoginController extends GetxController {
       passWordError.value = null;
       checkSuccessPass.value = true;
     } else {
-      passWordError.value = 'Minimum length 6 characters!';
+      passWordError.value = 'Mật khẩu tối thiểu 6 kí tự!';
       checkSuccessPass.value = false;
     }
   }

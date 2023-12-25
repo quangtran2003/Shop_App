@@ -33,25 +33,6 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 70,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(10, 0, 20, 0),
-            child: GestureDetector(
-                onTap: () {
-                  // showModalBottomSheet(
-                  //     context: context,
-                  //     builder: (buildContext) {
-                  //       return SingleChildScrollView(
-                  //         child: Container(
-                  //           height: 100,
-                  //           child: MyTextField(),
-                  //         ),
-                  //       );
-                  //     });
-                },
-                child: const Icon(Icons.more_horiz)),
-          )
-        ],
         leadingWidth: 100,
         leading: Container(
           margin: const EdgeInsets.fromLTRB(10, 10, 0, 0),

@@ -29,7 +29,7 @@ class ResigerController extends GetxController {
 
   void comfrimPass() {
     if (passWord.value != comfrimPassWValue.value) {
-      confrimPassWordError.value = 'Confirm password is incorrect!';
+      confrimPassWordError.value = 'Xác thực mật khẩu không chính xác!';
       checkConfrimSuccessPass.value = false;
     } else {
       confrimPassWordError.value = null;
@@ -47,7 +47,7 @@ class ResigerController extends GetxController {
       checkEmail.value = true;
     } else {
       checkEmail.value = false;
-      emailError.value = 'Invalid email!';
+      emailError.value = 'Email không hợp lệ!';
     }
   }
 
@@ -59,7 +59,7 @@ class ResigerController extends GetxController {
       passWordError.value = null;
       checkSuccessPassW.value = true;
     } else {
-      passWordError.value = 'Minimum length 6 characters!';
+      passWordError.value = 'Mật khẩu dài tối thiểu 6 kí tự!';
       checkSuccessPassW.value = false;
     }
     passWord.value = value;

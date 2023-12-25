@@ -13,8 +13,6 @@ class Login extends GetView<LoginController> {
   Login({super.key});
   @override
   Widget build(BuildContext context) {
-    //  controller.createAcc();
-
     final x = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SingleChildScrollView(
@@ -44,7 +42,7 @@ class Login extends GetView<LoginController> {
               Container(
                   alignment: Alignment.bottomLeft,
                   child: MyText(
-                    text: 'Login',
+                    text: 'Đăng nhập',
                     color: Colors.purple,
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
@@ -52,7 +50,7 @@ class Login extends GetView<LoginController> {
               Obx(
                 () => MyTextField(
                   errorText: controller.userNameError.value,
-                  textHint: 'Enter your email',
+                  textHint: 'Nhập email của bạn',
                   textColor: Colors.purple,
                   onChange: (value) {
                     controller.validateUserName(value);
@@ -67,7 +65,7 @@ class Login extends GetView<LoginController> {
                     controller.validatePassWord(value);
                     controller.login();
                   },
-                  textHint: 'PassWord',
+                  textHint: 'Nhập mật khẩu',
                   hasPass: true,
                   textColor: Colors.purple,
                 ),
@@ -119,13 +117,13 @@ class Login extends GetView<LoginController> {
                 },
                 child: const Center(
                   child: Text.rich(TextSpan(
-                      text: 'Do not have account ? ',
+                      text: 'Bạn chưa có tài khoản? ',
                       style: TextStyle(
                           fontSize: 17,
                           color: Color.fromARGB(255, 104, 104, 104)),
                       children: [
                         TextSpan(
-                            text: 'Resiger',
+                            text: 'Đăng kí',
                             style: TextStyle(
                                 fontSize: 17,
                                 decoration: TextDecoration.underline,
