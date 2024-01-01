@@ -26,7 +26,11 @@ class OrderedScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: IconButton(
                   onPressed: () {
-                    Navigator.of(context).pushNamed(HOME_SCREEN);
+                           Navigator.of(context).pushNamed(HOME_SCREEN, arguments: {
+                      '_blocHome': blocHome,
+                      '_blocAddress': blocAddress
+                    });
+                   // Navigator.of(context).pushNamed(HOME_SCREEN);
                   },
                   icon: const Icon(
                     Icons.home,

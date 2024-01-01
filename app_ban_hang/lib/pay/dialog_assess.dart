@@ -75,7 +75,7 @@ class DialogScreen extends StatelessWidget {
       flex: 1,
       child: GestureDetector(
         onTap: () {
-          Navigator.of(context).pushNamed(ORDERED_SCREEN,
+          Navigator.of(context).pushNamed(screen,
               arguments: {'_blocHome': blocHome, '_blocAddress': blocAddress});
         },
         child: Center(

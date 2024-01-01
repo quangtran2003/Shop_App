@@ -46,7 +46,7 @@ class DialogComfrim extends StatelessWidget {
                     ),
                     _buildButtom(
                       'Đồng ý',
-                      Colors.red,
+                      const Color.fromARGB(255, 255, 53, 39),
                       () {
                         Navigator.of(context).pushNamed(HOME_SCREEN);
                       },
@@ -74,6 +74,7 @@ class DialogComfrim extends StatelessWidget {
             boder: 10,
             child: Center(
                 child: MyText(
+              fontWeight: FontWeight.bold,
               text: text,
               color: Colors.black,
             )),

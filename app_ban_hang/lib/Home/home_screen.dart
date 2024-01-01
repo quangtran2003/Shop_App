@@ -2,6 +2,7 @@
 
 import 'package:app_ban_hang/Home/bloc.dart';
 import 'package:app_ban_hang/Home/list_product_screen.dart';
+import 'package:app_ban_hang/address/bloc.dart';
 import 'package:app_ban_hang/component/const.dart';
 import 'package:app_ban_hang/component/icon.dart';
 import 'package:app_ban_hang/component/product.dart';
@@ -30,6 +31,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     List<ProductModel> products = List<ProductModel>.from(
         data.map((item) => ProductModel.fromJson(item)));
+    ModalRoute.of(context)?.settings.arguments == null
+        ? _blocHome.order = 0
+        : _blocHome.order = 1;
+
+    Map<String, dynamic>? dataa =
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+    final BlocHome ? blocHome = dataa?['_blocHome'];
+    final BlocAddress? blocAddress = dataa?['_blocAddress'];
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 70,
@@ -44,6 +53,27 @@ class _HomeScreenState extends State<HomeScreen> {
                 image: AssetImage('assets/logo.png'), fit: BoxFit.cover),
           ),
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 20),
+            child: badges.Badge(
+              badgeContent: Text(_blocHome.order.toString()),
+              child: IconButton(
+                  onPressed: () {
+                   if (_blocHome.order!=0) {
+                      Navigator.of(context).pushNamed(ORDERED_SCREEN, arguments: {
+                      '_blocHome': blocHome,
+                      '_blocAddress': blocAddress
+                    });
+                   }
+                  },
+                  icon: const Icon(
+                    Icons.payment,
+                    size: 35,
+                  )),
+            ),
+          )
+        ],
       ),
       body: Column(
         children: [

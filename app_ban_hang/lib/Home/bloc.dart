@@ -45,6 +45,8 @@ class BlocHome {
   Stream<int> get streamGifsPrice => _gifsPriceController.stream;
   final StreamController<int> _payAllController = StreamController.broadcast();
   Stream<int> get streampayAll => _payAllController.stream;
+  final StreamController<int> _orders = StreamController.broadcast();
+  Stream<int> get streamOrders => _orders.stream;
 
   bool dippingSauce = false;
   bool soup = false;
@@ -61,6 +63,12 @@ class BlocHome {
   bool gifs = false;
   int gifsPrice = 0;
   int priceAll = 0;
+  int order = 0;
+
+  void checkOrders() {
+    order = 1;
+    _orders.sink.add(order);
+  }
 
   void payAll() {
     payCart();
