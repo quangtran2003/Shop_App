@@ -75,7 +75,7 @@ class MyProduct extends StatelessWidget {
               width: 100,
               alignment: Alignment.centerLeft,
               child: MyText(
-                text: '${format(price ?? 0)} vnđ',
+                text: '${format(sale ?? 0)} vnđ',
                 color: Colors.red,
                 fontSize: 16,
               ),
@@ -83,7 +83,7 @@ class MyProduct extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 0),
               child: MyText(
-                text: format(sale ?? 0),
+                text: format(price ?? 0),
                 decoration: TextDecoration.lineThrough,
               ),
             ),
